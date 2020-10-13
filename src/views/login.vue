@@ -1,27 +1,30 @@
 <template>
-    <div>
-        <el-card>
-            <el-form autoComplete="on">
-                <el-form-item prop="username">
-                    <el-input name="username"
-                              type="text"
-                              autoComplete="on"
-                              placeholder="请输入用户名"></el-input>
-                </el-form-item>
-                <el-form-item prop="password">
-                    <el-input name="password"
-                              :type="pwdType"
-                              autoComplete="on"
-                              placeholder="请输入密码"
-                    ></el-input>
-                </el-form-item>
-                <el-form-item>
-                    <el-button>登录</el-button>
-                    <el-button>获取体验账号</el-button>
-                </el-form-item>
-            </el-form>
-        </el-card>
-    </div>
+  <div>
+    <el-card>
+      <el-form>
+        <el-form-item prop="username">
+          <el-input
+            name="username"
+            type="text"
+            placeholder="请输入用户名"
+            v-model="loginForm.username"
+          ></el-input>
+        </el-form-item>
+        <el-form-item prop="password">
+          <el-input
+            name="password"
+            type="text"
+            placeholder="请输入密码"
+            v-model="loginForm.password"
+          ></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button @click="onloading(loginForm.username)">登录</el-button>
+          <el-button>获取体验账号</el-button>
+        </el-form-item>
+      </el-form>
+    </el-card>
+  </div>
 </template>
 <script>
 export default {
@@ -37,17 +40,10 @@ export default {
   },
   methods: {
     onloading () {
-      this.$axios.post('/api/ratings/list').then(res => {
-        const { code, data } = res.data
-        if (code === 200 && data) {
-          data.forEach(v => {
-            this.list.push(v)
-          })
-          this.loading = false
-        }
-        if (this.list.length >= 100) {
-          this.finished = true
-        }
+      this.$axios.post('/api/login').then(res => {
+        console.log(res.data.login.data)
+        // const { data } = res.data
+        // console.log(data)
       }).catch(err => {
         console.log(`调用失败：' ${err}`)
       })
