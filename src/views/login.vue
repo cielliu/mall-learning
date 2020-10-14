@@ -41,7 +41,7 @@ export default {
   methods: {
     onloading () {
       this.$axios.post('/api/login').then(res => {
-        console.log(res.data.login.data)
+        console.log(res.data.data)
         // const { data } = res.data
         // console.log(data)
       }).catch(err => {

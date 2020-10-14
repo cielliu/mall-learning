@@ -5,10 +5,10 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
 import axios from 'axios'
-import '@/mock'
-// import { mockXHR } from './mock'
+// import '@/mock'
+import { mockXHR } from './mock'
 
-// mockXHR()
+mockXHR()
 
 // if (process.env.NODE_ENV === 'development') {
 //   mockXHR()
